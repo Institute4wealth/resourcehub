@@ -1,89 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Institute4Wealth Resource Hub</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institute4Wealth Resource Hub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .category-container {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .category-image {
+            width: 100%; /* Make images responsive */
+            max-width: 300px; /* Max width for images */
+            height: auto;
+            cursor: pointer;
+            display: block; /* Remove extra space below image */
+            margin: 0 auto 10px auto; /* Center image and add space below */
+            border-radius: 4px;
+        }
+        .category-title {
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #0056b3;
+        }
+        .link-list {
+            display: none; /* Hidden by default */
+            list-style: none;
+            padding: 0;
+            margin-top: 15px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        .link-list li {
+            margin-bottom: 8px;
+        }
+        .link-list a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .link-list a:hover {
+            text-decoration: underline;
+        }
+        /* Basic grid for categories if preferred */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
 
-<h1>Institute4Wealth Resource Hub</h1>
+    <h1 style="text-align: center; color: #0056b3;">Institute4Wealth Resource Hub</h1>
 
-<h2>Instagram Profiles</h2>
-<ul>
-  <li><a href="https://www.instagram.com/moneysmartguy?igsh=cXJqdTI3OHRzaTA2">MoneySmartGuy</a></li>
-  <li><a href="https://www.instagram.com/soldoutservant?igsh=dGN3aGZtajcwZzVk">SoldOutServant</a></li>
-  <li><a href="https://www.instagram.com/patrickbetdavid?igsh=MTl6ZXJkdW02OGtsdA==">Patrick Bet-David</a></li>
-  <li><a href="https://www.instagram.com/phpagency?igsh=MWtrMnUwbXQ5YjJzYQ==">PHP Agency</a></li>
-</ul>
+    <div class="grid-container">
+        <div class="category-container">
+            <h2 class="category-title">Portals & Enrollment</h2>
+            <img src="image_url_for_category_1.jpg" alt="Portals & Enrollment" class="category-image" onclick="toggleLinks('portalsLinks')">
+            <ul id="portalsLinks" class="link-list">
+                <li><a href="https://app.phpbamboo.com/agent/signin">PHP Agency Agent Sign-in</a></li>
+                <li><a href="https://quest.phpagency.com/enrollments">Quest Enrollment (PHP Agency)</a></li>
+                <li><a href="https://sso.teachable.com/secure/2465812/identity/sign_up/otp">Teachable Sign-Up (OTP)</a></li>
+            </ul>
+        </div>
 
-<h2>YouTube Channels / Playlists</h2>
-<ul>
-  <li><a href="https://www.youtube.com/@PHPAgency">PHP Agency (YouTube Channel)</a></li>
-  <li><a href="https://www.youtube.com/@servetoearn9272">Serve to Earn (YouTube Channel)</a></li>
-  <li><a href="https://www.youtube.com/@7FigureSquad">7 Figure Squad (YouTube Channel)</a></li>
-  <li><a href="https://www.youtube.com/@VALUETAINMENT/videos">Valuetainment (YouTube Channel)</a></li>
- 
-   <li><a href="https://www.youtube.com/watch?v=O8Vbl9y5Qvk"> Kiana Anderson Greatness Path</a></li>
+        <div class="category-container">
+            <h2 class="category-title">Licensing & Exam Prep</h2>
+            <img src="image_url_for_category_2.jpg" alt="Licensing & Exam Prep" class="category-image" onclick="toggleLinks('licensingLinks')">
+            <ul id="licensingLinks" class="link-list">
+                <li><a href="https://www.xcelsolutions.com">XCEL Solutions</a></li>
+                <li><a href="https://www.prometric.com/exams/mia">Prometric Exam MIA</a></li>
+                <li><a href="https://www.prometric.com/insurance-practice-test">Prometric Insurance Practice Test</a></li>
+                <li><a href="https://www.brainscape.com/p/6B6KO-LH-DEMHH">Brainscape Flash-Card Deck</a></li>
+            </ul>
+        </div>
 
+        <div class="category-container">
+            <h2 class="category-title">Onboarding Documents & Tools</h2>
+            <img src="image_url_for_category_3.jpg" alt="Onboarding Documents & Tools" class="category-image" onclick="toggleLinks('documentsLinks')">
+            <ul id="documentsLinks" class="link-list">
+                <li><a href="https://docs.google.com/presentation/d/18wR3ZUkle_TovdN8aM9DEru8-tuxIqHBziht1_8s7CM/edit?usp=drivesdk">Presentation — Onboarding Deck 1</a></li>
+                <li><a href="https://docs.google.com/presentation/d/10kEZzzLXr_fvvI_WL4CxhleV2RwOYoiTsG9BmtaNxOg/edit?usp=drivesdk">Presentation — Onboarding Deck 2</a></li>
+                <li><a href="https://docs.google.com/document/d/1TBJBJXBJHjPoYgKI3sSX58R3i7YBZVLYo3Sp_ofRYuw/edit?usp=sharing">Document — Training Guide 1</a></li>
+                <li><a href="https://docs.google.com/document/d/118U72MWvgP0DP8iL5_EToI0UHrEQQ0uDqtQ__lX2UFE/edit">Document — Training Guide 2</a></li>
+                <li><a href="https://docs.google.com/document/d/1I122fVQa6jY_cQgFqrmlZqglzphitwjFsAJdYn-k3h8/edit">Document — Training Guide 3</a></li>
+                <li><a href="https://docs.google.com/document/d/132yCUMxUmjKEvZMyLfXPh0nCKA9mhMFtcST7-Tx6NfA/edit">Document — Training Guide 6</a></li>
+                <li><a href="https://docs.google.com/presentation/d/1fl3Di8r66ykEF1F0WzY5tgd5NDBrrGCAlsOXspQkuWs/edit?usp=sharing">Presentation — CFT PANEL CHECKLIST</a></li>
+                <li><a href="https://docs.google.com/spreadsheets/d/1J1uOsthhvERm8OcjBNRm8uELJC1vzxYcyIVRPFZHV_M/edit?usp=sharing">Spreadsheet — Planning/Tracking 1</a></li>
+                <li><a href="https://docs.google.com/spreadsheets/d/1vzjgx_GyrHowfGyJSZ5DKxKhC-6NDA5b2I0jRyLe-C4/edit?usp=sharing">Spreadsheet — Planning/Tracking 2</a></li>
+                <li><a href="https://docs.google.com/spreadsheets/d/1ukI0PyY6qUMyF4tslG-XYwzUpzZo49wjFQJjhaDLbFU/edit?usp=sharing">Spreadsheet — Planning/Tracking 3</a></li>
+            </ul>
+        </div>
 
-</ul>
+        <div class="category-container">
+            <h2 class="category-title">Training Modules & Strategy</h2>
+            <img src="image_url_for_category_4.jpg" alt="Training Modules & Strategy" class="category-image" onclick="toggleLinks('trainingLinks')">
+            <ul id="trainingLinks" class="link-list">
+                <li><a href="https://www.dropbox.com/scl/fi/vtbm6wp33y5n13fauwwad/Fast-Start-Compensation-Breakdown.mp4?rlkey=2dh5vuuipz9osduvnu0y89wuj&e=1&st=r4ri3sj0&dl=0">Fast-Start Compensation Breakdown (Dropbox)</a></li>
+                <li><a href="https://www.loom.com/share/33aa22abf08f44619b1eb5fed13042dd?sid=79225b02-5d01-4642-831e-8de38789bbd9">Loom Training Video</a></li>
+                <li><a href="https://youtu.be/D66p_kJqieo?si=rKsqiGXmis06Jr7S">How to Write a One Page Business Plan (YouTube)</a></li>
+                <li><a href="https://youtu.be/hdGKAHvgBqo?si=ICZwyAN1hr_HC8jP">How To Build Generational Wealth In 2025 (YouTube)</a></li>
+            </ul>
+        </div>
 
-<h2>YouTube Videos</h2>
-<ul>
-  <li><a href="https://youtu.be/D66p_kJqieo?si=rKsqiGXmis06Jr7S">How to Write a One Page Business Plan</a></li>
-  <li><a href="https://youtu.be/hdGKAHvgBqo?si=ICZwyAN1hr_HC8jP">How To Build Generational Wealth In 2025</a></li>
-    <li><a href="https://www.youtube.com/watch?v=ur1Ay2UMn2c">Top 10 Investments Patrick Bet-David Made In His Life </a></li>
-  
+        <div class="category-container">
+            <h2 class="category-title">Leadership & Mentorship</h2>
+            <img src="image_url_for_category_5.jpg" alt="Leadership & Mentorship" class="category-image" onclick="toggleLinks('leadershipLinks')">
+            <ul id="leadershipLinks" class="link-list">
+                <li>**Instagram Profiles:**
+                    <ul>
+                        <li><a href="https://www.instagram.com/patrickbetdavid?igsh=MTl6ZXJkdW02OGtsdA==">Patrick Bet-David</a></li>
+                        <li><a href="https://www.instagram.com/moneysmartguy?igsh=cXJqdTI3OHRzaTA2">MoneySmartGuy</a></li>
+                        <li><a href="https://www.instagram.com/soldoutservant?igsh=dGN3aGZtajcwZzVk">SoldOutServant</a></li>
+                        <li><a href="https://www.instagram.com/phpagency?igsh=MWtrMnUwbXQ5YjJzYQ==">PHP Agency</a></li>
+                    </ul>
+                </li>
+                <li>**YouTube Channels:**
+                    <ul>
+                        <li><a href="https://www.youtube.com/@PHPAgency">PHP Agency</a></li>
+                        <li><a href="https://www.youtube.com/@VALUETAINMENT/videos">Valuetainment</a></li>
+                        <li><a href="https://www.youtube.com/@7FigureSquad">7 Figure Squad</a></li>
+                        <li><a href="https://www.youtube.com/@servetoearn9272">Serve to Earn</a></li>
+                    </ul>
+                </li>
+                <li>**Key Videos:**
+                    <ul>
+                        <li><a href="https://www.youtube.com/watch?v=O8Vbl9y5Qvk">Kiana Anderson Greatness Path</a></li>
+                        <li><a href="https://www.youtube.com/watch?v=ur1Ay2UMn2c">Top 10 Investments Patrick Bet-David Made</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
 
-</ul>
+        <div class="category-container">
+            <h2 class="category-title">Events & Community</h2>
+            <img src="image_url_for_category_6.jpg" alt="Events & Community" class="category-image" onclick="toggleLinks('eventsLinks')">
+            <ul id="eventsLinks" class="link-list">
+                <li><a href="https://www.eventcombo.com/e/2026-Regional-Event-76005">2026 Regional Event Registration</a></li>
+                <li><a href="https://www.youtube.com/watch?v=UwPMfOVnfyo">PHP Take Off 2025 - Event Highlights</a></li>
+            </ul>
+        </div>
+    </div>
 
-<h2>Portal / Sign-In / Enrollment</h2>
-<ul>
-  <li><a href="https://app.phpbamboo.com/agent/signin">PHP Agency Agent Sign-in</a></li>
-  <li><a href="https://sso.teachable.com/secure/2465812/identity/sign_up/otp">Teachable Sign-Up (OTP)</a></li>
-  <li><a href="https://quest.phpagency.com/enrollments">Quest Enrollment (PHP Agency)</a></li>
-</ul>
-
-<h2>Education / Testing / Practice Resources</h2>
-<ul>
-  <li><a href="https://www.prometric.com/exams/mia">Prometric Exam MIA</a></li>
-  <li><a href="https://www.prometric.com/insurance-practice-test">Prometric Insurance Practice Test</a></li>
-  <li><a href="https://www.brainscape.com/p/6B6KO-LH-DEMHH">Brainscape Flash-Card Deck</a></li>
-  <li><a href="https://www.xcelsolutions.com">XCEL Solutions</a></li>
-</ul>
-
-<h2>Documents / Presentations / Spreadsheets</h2>
-<ul>
-  <li><a href="https://docs.google.com/presentation/d/18wR3ZUkle_TovdN8aM9DEru8-tuxIqHBziht1_8s7CM/edit?usp=drivesdk">Presentation — Onboarding Deck 1</a></li>
-  <li><a href="https://docs.google.com/presentation/d/10kEZzzLXr_fvvI_WL4CxhleV2RwOYoiTsG9BmtaNxOg/edit?usp=drivesdk">Presentation — Onboarding Deck 2</a></li>
-  <li><a href="https://docs.google.com/document/d/1TBJBJXBJHjPoYgKI3sSX58R3i7YBZVLYo3Sp_ofRYuw/edit?usp=sharing">Document — Training Guide 1</a></li>
-  <li><a href="https://docs.google.com/document/d/118U72MWvgP0DP8iL5_EToI0UHrEQQ0uDqtQ__lX2UFE/edit">Document — Training Guide 2</a></li>
-  <li><a href="https://docs.google.com/document/d/1I122fVQa6jY_cQgFqrmlZqglzphitwjFsAJdYn-k3h8/edit">Document — Training Guide 3</a></li>
-  <li><a href="https://docs.google.com/presentation/d/1fl3Di8r66ykEF1F0WzY5tgd5NDBrrGCAlsOXspQkuWs/edit?usp=sharing">Presentation — CFT PANEL CHECKLIST</a></li>
-  <li><a href="https://docs.google.com/document/d/132yCUMxUmjKEvZMyLfXPh0nCKA9mhMFtcST7-Tx6NfA/edit">Document — Training Guide 6</a></li>
-  <li><a href="https://docs.google.com/spreadsheets/d/1J1uOsthhvERm8OcjBNRm8uELJC1vzxYcyIVRPFZHV_M/edit?usp=sharing">Spreadsheet — Planning/Tracking 1</a></li>
-  <li><a href="https://docs.google.com/spreadsheets/d/1vzjgx_GyrHowfGyJSZ5DKxKhC-6NDA5b2I0jRyLe-C4/edit?usp=sharing">Spreadsheet — Planning/Tracking 2</a></li>
-  <li><a href="https://docs.google.com/spreadsheets/d/1ukI0PyY6qUMyF4tslG-XYwzUpzZo49wjFQJjhaDLbFU/edit?usp=sharing">Spreadsheet — Planning/Tracking 3</a></li>
-</ul>
-
-<h2>Video / Compensation Resources</h2>
-<ul>
-  <li><a href="https://www.dropbox.com/scl/fi/vtbm6wp33y5n13fauwwad/Fast-Start-Compensation-Breakdown.mp4?rlkey=2dh5vuuipz9osduvnu0y89wuj&e=1&st=r4ri3sj0&dl=0">Fast-Start Compensation Breakdown (Dropbox)</a></li>
-  <li><a href="https://www.loom.com/share/33aa22abf08f44619b1eb5fed13042dd?sid=79225b02-5d01-4642-831e-8de38789bbd9">Loom Training Video</a></li>
-</ul>
-
-<h2>Event / Registration</h2>
-<ul>
-  <li><a href="https://www.eventcombo.com/e/2026-Regional-Event-76005">2026 Regional Event</a></li>
-<li><a href="https://www.youtube.com/watch?v=UwPMfOVnfyo">PHP Take Off 2025 - Event Highlights </a></li>
-
-
-</ul>
+    <script>
+        function toggleLinks(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
 
 </body>
 </html>
-
-
-
-
