@@ -5,80 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Institute4Wealth Resource Hub</title>
     <style>
-       
-       body {
+        body {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             margin: 0;
             padding: 20px;
             /* BACKGROUND SETUP */
             background: url('00proact.png') no-repeat center center fixed; 
             background-size: cover;
-            color: #333;
-        }       
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f4f4f4;
-            color: #333;
+            color: #ffffff; /* White text for readability on dark background */
         }
-        .category-container {
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            padding: 15px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+        /* Centered Feed Container */
+        .feed-container {
+            max-width: 600px;
+            margin: 0 auto;
         }
+
+        h1 {
+            text-align: center;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px #000000;
+            margin-bottom: 40px;
+        }
+
+        /* Wrapper for each item (just for spacing, no visual card) */
+        .category-wrapper {
+            margin-bottom: 30px;
+        }
+
         .category-image {
-            width: 100%; /* Make images responsive */
-            max-width: 300px; /* Max width for images */
+            width: 100%;
             height: auto;
             cursor: pointer;
-            display: block; /* Remove extra space below image */
-            margin: 0 auto 10px auto; /* Center image and add space below */
-            border-radius: 4px;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5); /* Shadow to make image pop */
+            transition: transform 0.2s ease;
         }
-        .category-title {
-            text-align: center;
-            font-size: 1.2em;
-            margin-bottom: 15px;
-            color: #0056b3;
+
+        .category-image:hover {
+            transform: scale(1.02); /* Slight zoom effect */
         }
+
+        /* The Link List - appearing directly under image */
         .link-list {
             display: none; /* Hidden by default */
             list-style: none;
-            padding: 0;
-            margin-top: 15px;
-            border-top: 1px solid #eee;
-            padding-top: 15px;
+            padding: 15px;
+            margin-top: 10px;
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent dark background for readability */
+            border-radius: 8px;
         }
+
         .link-list li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            line-height: 1.5;
         }
+
+        .link-list ul {
+            margin-top: 5px;
+            margin-bottom: 10px;
+            padding-left: 20px;
+            list-style: disc;
+            color: #ddd;
+        }
+
         .link-list a {
-            color: #007bff;
+            color: #4da3ff; /* Light blue link color for visibility */
             text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1em;
         }
+
         .link-list a:hover {
             text-decoration: underline;
-        }
-        /* Basic grid for categories if preferred */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
+            color: #80bfff;
         }
     </style>
 </head>
 <body>
 
-    <h1 style="text-align: center; color: #0056b3;">Institute4Wealth Resource Hub</h1>
+    <h1>Institute4Wealth Resource Hub</h1>
 
-    <div class="grid-container">
-        <div class="category-container">
-            <h2 class="category-title">Portals & Enrollment</h2>
+    <div class="feed-container">
+        
+        <div class="category-wrapper">
             <img src="image_url_for_category_1.png" alt="Portals & Enrollment" class="category-image" onclick="toggleLinks('portalsLinks')">
             <ul id="portalsLinks" class="link-list">
                 <li><a href="https://app.phpbamboo.com/agent/signin">PHP Agency Agent Sign-in</a></li>
@@ -86,11 +97,10 @@
             </ul>
         </div>
 
-        <div class="category-container">
-            <h2 class="category-title">Licensing & Exam Prep</h2>
+        <div class="category-wrapper">
             <img src="image_url_for_category_2.png" alt="Licensing & Exam Prep" class="category-image" onclick="toggleLinks('licensingLinks')">
             <ul id="licensingLinks" class="link-list">
-               <li><a href="https://sso.teachable.com/secure/2465812/identity/sign_up/otp">Teachable Sign-Up (OTP)</a></li>
+                <li><a href="https://sso.teachable.com/secure/2465812/identity/sign_up/otp">Teachable Sign-Up (OTP)</a></li>
                 <li><a href="https://www.xcelsolutions.com">XCEL Solutions</a></li>
                 <li><a href="https://www.prometric.com/exams/mia">Prometric Exam MIA</a></li>
                 <li><a href="https://www.prometric.com/insurance-practice-test">Prometric Insurance Practice Test</a></li>
@@ -98,8 +108,7 @@
             </ul>
         </div>
 
-        <div class="category-container">
-            <h2 class="category-title">Onboarding Documents & Tools</h2>
+        <div class="category-wrapper">
             <img src="image_url_for_category_3.png" alt="Onboarding Documents & Tools" class="category-image" onclick="toggleLinks('documentsLinks')">
             <ul id="documentsLinks" class="link-list">
                 <li><a href="https://docs.google.com/presentation/d/18wR3ZUkle_TovdN8aM9DEru8-tuxIqHBziht1_8s7CM/edit?usp=drivesdk">Presentation — Onboarding Deck 1</a></li>
@@ -115,8 +124,7 @@
             </ul>
         </div>
 
-        <div class="category-container">
-            <h2 class="category-title">Training Modules & Strategy</h2>
+        <div class="category-wrapper">
             <img src="image_url_for_category_4.png" alt="Training Modules & Strategy" class="category-image" onclick="toggleLinks('trainingLinks')">
             <ul id="trainingLinks" class="link-list">
                 <li><a href="https://www.dropbox.com/scl/fi/vtbm6wp33y5n13fauwwad/Fast-Start-Compensation-Breakdown.mp4?rlkey=2dh5vuuipz9osduvnu0y89wuj&e=1&st=r4ri3sj0&dl=0">Fast-Start Compensation Breakdown (Dropbox)</a></li>
@@ -124,15 +132,13 @@
                 <li><a href="https://youtu.be/D66p_kJqieo?si=rKsqiGXmis06Jr7S">How to Write a One Page Business Plan (YouTube)</a></li>
                 <li><a href="https://youtu.be/hdGKAHvgBqo?si=ICZwyAN1hr_HC8jP">How To Build Generational Wealth In 2025 (YouTube)</a></li>
                 <li><a href="https://www.youtube.com/watch?v=O8Vbl9y5Qvk">Kiana Anderson Greatness Path</a></li>
-
             </ul>
         </div>
 
-        <div class="category-container">
-            <h2 class="category-title">Leadership & Mentorship</h2>
+        <div class="category-wrapper">
             <img src="image_url_for_category_5.png" alt="Leadership & Mentorship" class="category-image" onclick="toggleLinks('leadershipLinks')">
             <ul id="leadershipLinks" class="link-list">
-                <li>**Instagram Profiles:**
+                <li><strong>Instagram Profiles:</strong>
                     <ul>
                         <li><a href="https://www.instagram.com/patrickbetdavid?igsh=MTl6ZXJkdW02OGtsdA==">Patrick Bet-David</a></li>
                         <li><a href="https://www.instagram.com/moneysmartguy?igsh=cXJqdTI3OHRzaTA2">MoneySmartGuy</a></li>
@@ -140,7 +146,7 @@
                         <li><a href="https://www.instagram.com/phpagency?igsh=MWtrMnUwbXQ5YjJzYQ==">PHP Agency</a></li>
                     </ul>
                 </li>
-                <li>**YouTube Channels:**
+                <li><strong>YouTube Channels:</strong>
                     <ul>
                         <li><a href="https://www.youtube.com/@PHPAgency">PHP Agency</a></li>
                         <li><a href="https://www.youtube.com/@VALUETAINMENT/videos">Valuetainment</a></li>
@@ -148,7 +154,7 @@
                         <li><a href="https://www.youtube.com/@servetoearn9272">Serve to Earn</a></li>
                     </ul>
                 </li>
-                <li>**Key Videos:**
+                <li><strong>Key Videos:</strong>
                     <ul>
                         <li><a href="https://www.youtube.com/watch?v=ur1Ay2UMn2c">Top 10 Investments Patrick Bet-David Made</a></li>
                     </ul>
@@ -156,14 +162,14 @@
             </ul>
         </div>
 
-        <div class="category-container">
-            <h2 class="category-title">Events & Community</h2>
+        <div class="category-wrapper">
             <img src="image_url_for_category_6.png" alt="Events & Community" class="category-image" onclick="toggleLinks('eventsLinks')">
             <ul id="eventsLinks" class="link-list">
                 <li><a href="https://www.eventcombo.com/e/2026-Regional-Event-76005">2026 Regional Event Registration</a></li>
                 <li><a href="https://www.youtube.com/watch?v=UwPMfOVnfyo">PHP Take Off 2025 - Event Highlights</a></li>
             </ul>
         </div>
+
     </div>
 
     <script>
@@ -179,6 +185,3 @@
 
 </body>
 </html>
-
-
-
