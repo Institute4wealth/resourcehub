@@ -9,28 +9,34 @@
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             margin: 0;
             padding: 20px;
-            /* BACKGROUND SETUP */
             background: url('00proact.png') no-repeat center center fixed; 
             background-size: cover;
             color: #ffffff; /* White text for readability on dark background */
-        }
-
-        /* Centered Feed Container */
-        .feed-container {
-            max-width: 600px;
-            margin: 0 auto;
+            line-height: 1.6;
         }
 
         h1 {
             text-align: center;
             color: #ffffff;
-            text-shadow: 2px 2px 4px #000000;
-            margin-bottom: 40px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
+            margin-bottom: 50px;
+            font-size: 2.8em;
+            letter-spacing: 1px;
         }
 
-        /* Wrapper for each item (just for spacing, no visual card) */
-        .category-wrapper {
-            margin-bottom: 30px;
+        /* Grid container for 2 rows of 3 images */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 3 columns, responsive */
+            gap: 30px; /* Space between grid items */
+            max-width: 960px; /* Adjust max width of the grid */
+            margin: 0 auto; /* Center the grid container */
+            padding: 10px;
+        }
+
+        .category-item {
+            position: relative;
+            margin-bottom: 0; /* No margin-bottom on individual items as gap handles spacing */
         }
 
         .category-image {
@@ -38,48 +44,94 @@
             height: auto;
             cursor: pointer;
             display: block;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5); /* Shadow to make image pop */
-            transition: transform 0.2s ease;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
 
         .category-image:hover {
-            transform: scale(1.02); /* Slight zoom effect */
+            transform: scale(1.02);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.8);
         }
 
-        /* The Link List - appearing directly under image */
+        /* The Link List - now directly under the image within its grid cell */
         .link-list {
             display: none; /* Hidden by default */
             list-style: none;
-            padding: 15px;
-            margin-top: 10px;
-            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent dark background for readability */
-            border-radius: 8px;
+            padding: 15px 20px;
+            margin-top: 10px; /* Space between image and revealed links */
+            background-color: rgba(0, 0, 0, 0.7); /* Slightly darker for better link visibility */
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+            border-top: 1px solid rgba(255, 215, 0, 0.5);
+            padding-top: 20px;
+            /* Added for consistent spacing when list is hidden/shown */
+            min-height: 0; 
+            overflow: hidden;
         }
 
         .link-list li {
-            margin-bottom: 10px;
-            line-height: 1.5;
+            margin-bottom: 12px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            backdrop-filter: blur(3px);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+        }
+        
+        /* Styling for nested lists (Instagram/YouTube Profiles) */
+        .link-list li ul {
+            list-style: disc; /* Use disc bullets for nested lists */
+            padding-left: 20px;
+            margin-top: 5px;
+            color: #ddd; /* Slightly lighter text for nested list items */
         }
 
-        .link-list ul {
-            margin-top: 5px;
-            margin-bottom: 10px;
-            padding-left: 20px;
-            list-style: disc;
-            color: #ddd;
+        .link-list li ul li {
+            background-color: transparent; /* No background for nested list items */
+            border: none;
+            padding: 5px 0;
+            margin-bottom: 5px;
         }
+
 
         .link-list a {
-            color: #4da3ff; /* Light blue link color for visibility */
+            color: #ffe08a;
             text-decoration: none;
             font-weight: 500;
+            display: block;
             font-size: 1.1em;
+            transition: color 0.2s ease-in-out;
         }
 
         .link-list a:hover {
+            color: #fff;
             text-decoration: underline;
-            color: #80bfff;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 900px) {
+            .grid-container {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust column width */
+                gap: 20px;
+                max-width: 90%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .grid-container {
+                grid-template-columns: 1fr; /* Single column on very small screens */
+                gap: 20px;
+                max-width: 95%;
+            }
+            h1 {
+                font-size: 2em;
+                margin-bottom: 30px;
+            }
+            .link-list {
+                padding: 10px 15px;
+            }
         }
     </style>
 </head>
@@ -87,9 +139,9 @@
 
     <h1>Institute4Wealth Resource Hub</h1>
 
-    <div class="feed-container">
+    <div class="grid-container">
         
-        <div class="category-wrapper">
+        <div class="category-item">
             <img src="image_url_for_category_1.png" alt="Portals & Enrollment" class="category-image" onclick="toggleLinks('portalsLinks')">
             <ul id="portalsLinks" class="link-list">
                 <li><a href="https://app.phpbamboo.com/agent/signin">PHP Agency Agent Sign-in</a></li>
@@ -97,7 +149,7 @@
             </ul>
         </div>
 
-        <div class="category-wrapper">
+        <div class="category-item">
             <img src="image_url_for_category_2.png" alt="Licensing & Exam Prep" class="category-image" onclick="toggleLinks('licensingLinks')">
             <ul id="licensingLinks" class="link-list">
                 <li><a href="https://sso.teachable.com/secure/2465812/identity/sign_up/otp">Teachable Sign-Up (OTP)</a></li>
@@ -108,7 +160,7 @@
             </ul>
         </div>
 
-        <div class="category-wrapper">
+        <div class="category-item">
             <img src="image_url_for_category_3.png" alt="Onboarding Documents & Tools" class="category-image" onclick="toggleLinks('documentsLinks')">
             <ul id="documentsLinks" class="link-list">
                 <li><a href="https://docs.google.com/presentation/d/18wR3ZUkle_TovdN8aM9DEru8-tuxIqHBziht1_8s7CM/edit?usp=drivesdk">Presentation — Onboarding Deck 1</a></li>
@@ -124,7 +176,7 @@
             </ul>
         </div>
 
-        <div class="category-wrapper">
+        <div class="category-item">
             <img src="image_url_for_category_4.png" alt="Training Modules & Strategy" class="category-image" onclick="toggleLinks('trainingLinks')">
             <ul id="trainingLinks" class="link-list">
                 <li><a href="https://www.dropbox.com/scl/fi/vtbm6wp33y5n13fauwwad/Fast-Start-Compensation-Breakdown.mp4?rlkey=2dh5vuuipz9osduvnu0y89wuj&e=1&st=r4ri3sj0&dl=0">Fast-Start Compensation Breakdown (Dropbox)</a></li>
@@ -135,7 +187,7 @@
             </ul>
         </div>
 
-        <div class="category-wrapper">
+        <div class="category-item">
             <img src="image_url_for_category_5.png" alt="Leadership & Mentorship" class="category-image" onclick="toggleLinks('leadershipLinks')">
             <ul id="leadershipLinks" class="link-list">
                 <li><strong>Instagram Profiles:</strong>
@@ -162,7 +214,7 @@
             </ul>
         </div>
 
-        <div class="category-wrapper">
+        <div class="category-item">
             <img src="image_url_for_category_6.png" alt="Events & Community" class="category-image" onclick="toggleLinks('eventsLinks')">
             <ul id="eventsLinks" class="link-list">
                 <li><a href="https://www.eventcombo.com/e/2026-Regional-Event-76005">2026 Regional Event Registration</a></li>
