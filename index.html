@@ -5,38 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Institute4Wealth Resource Hub</title>
     <style>
+        /* --- NEW BODY STYLES --- */
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; /* More modern font stack */
             margin: 0;
-            padding: 20px;
+            padding: 0; /* Changed to 0 as content is within feed-container */
             background: url('00proact.png') no-repeat center center fixed; 
             background-size: cover;
-            color: #ffffff; /* White text for readability on dark background */
+            color: #E0E0E0; /* Slightly off-white for softer tech look */
             line-height: 1.6;
+            min-height: 100vh; /* Ensure body takes full viewport height */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            position: relative; /* For pseudo-element overlay */
         }
 
+        /* --- OPTIONAL: Background Overlay for better text contrast --- */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4); /* Dark semi-transparent overlay */
+            z-index: -1; /* Place it behind content but above background image */
+        }
+
+        /* --- UPDATED H1 TITLE --- */
         h1 {
             text-align: center;
-            color: #ffffff;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
-            margin-bottom: 50px;
-            font-size: 2.8em;
-            letter-spacing: 1px;
+            color: #FFFFFF; /* Pure white for the main title */
+            text-shadow: 0 0 10px rgba(77, 163, 255, 0.8), /* Blue glow */
+                         0 0 20px rgba(77, 163, 255, 0.6); /* Wider blue glow */
+            margin-top: 40px; /* Adjust top margin */
+            margin-bottom: 60px; /* More space below the main title */
+            font-size: 3.2em; /* Even larger title */
+            letter-spacing: 2px;
+            font-weight: 700; /* Bolder title */
+            animation: fadeIn 2s ease-out; /* Simple fade-in animation */
         }
 
-        /* Grid container for 2 rows of 3 images */
+        /* --- Adjustments for the feed-container to sit on top --- */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 3 columns, responsive */
             gap: 30px; /* Space between grid items */
             max-width: 960px; /* Adjust max width of the grid */
             margin: 0 auto; /* Center the grid container */
-            padding: 10px;
+            padding: 20px; /* Add padding here instead of body */
+            position: relative; /* Ensure it stacks correctly over overlay */
+            z-index: 1; /* Bring it above the ::before pseudo-element */
         }
 
+        /* --- Category Item Styling (no card, just image and its associated list) --- */
         .category-item {
             position: relative;
-            margin-bottom: 0; /* No margin-bottom on individual items as gap handles spacing */
         }
 
         .category-image {
@@ -55,18 +78,19 @@
             box-shadow: 0 12px 25px rgba(0,0,0,0.8);
         }
 
-        /* The Link List - now directly under the image within its grid cell */
+        /* --- Link List Styling Refinement --- */
         .link-list {
             display: none; /* Hidden by default */
             list-style: none;
             padding: 15px 20px;
             margin-top: 10px; /* Space between image and revealed links */
-            background-color: rgba(0, 0, 0, 0.7); /* Slightly darker for better link visibility */
+            background-color: rgba(0, 0, 0, 0.8); /* Darker, less transparent for links */
             border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-            border-top: 1px solid rgba(255, 215, 0, 0.5);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); /* Subtle golden glow for the list */
+            transition: all 0.3s ease-in-out; /* Smooth transition for showing/hiding */
+            backdrop-filter: blur(5px); /* Stronger blur for "frosted glass" look */
+            border: 1px solid rgba(255, 215, 0, 0.3); /* Softer golden border */
             padding-top: 20px;
-            /* Added for consistent spacing when list is hidden/shown */
             min-height: 0; 
             overflow: hidden;
         }
@@ -74,10 +98,10 @@
         .link-list li {
             margin-bottom: 12px;
             padding: 10px;
-            background-color: rgba(255, 255, 255, 0.08);
+            background-color: rgba(255, 255, 255, 0.05); /* Even subtler background */
             border-radius: 8px;
             backdrop-filter: blur(3px);
-            border: 1px solid rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.05); /* Very light golden line */
         }
         
         /* Styling for nested lists (Instagram/YouTube Profiles) */
@@ -85,7 +109,7 @@
             list-style: disc; /* Use disc bullets for nested lists */
             padding-left: 20px;
             margin-top: 5px;
-            color: #ddd; /* Slightly lighter text for nested list items */
+            color: #C0C0C0; /* Slightly lighter text for nested list items */
         }
 
         .link-list li ul li {
@@ -95,25 +119,32 @@
             margin-bottom: 5px;
         }
 
-
         .link-list a {
-            color: #ffe08a;
+            color: #4da3ff; /* Techy blue for links */
             text-decoration: none;
             font-weight: 500;
             display: block;
             font-size: 1.1em;
             transition: color 0.2s ease-in-out;
+            text-shadow: 0 0 5px rgba(77, 163, 255, 0.4); /* Subtle blue text glow */
         }
 
         .link-list a:hover {
-            color: #fff;
+            color: #a3d9ff; /* Lighter blue on hover */
             text-decoration: underline;
+            text-shadow: 0 0 8px #a3d9ff; /* More pronounced glow on hover */
         }
 
-        /* Responsive adjustments for smaller screens */
+        /* --- Animations --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Responsive adjustments for smaller screens --- */
         @media (max-width: 900px) {
             .grid-container {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust column width */
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
                 gap: 20px;
                 max-width: 90%;
             }
@@ -121,7 +152,7 @@
 
         @media (max-width: 600px) {
             .grid-container {
-                grid-template-columns: 1fr; /* Single column on very small screens */
+                grid-template-columns: 1fr;
                 gap: 20px;
                 max-width: 95%;
             }
