@@ -10,25 +10,36 @@
             font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; /* More modern font stack */
             margin: 0;
             padding: 0; /* Changed to 0 as content is within feed-container */
-            background: url('00proact.png') no-repeat center center fixed; 
-            background-size: cover;
             color: #DAA520; /* Slightly off-white for softer tech look */
             line-height: 1.6;
             min-height: 100vh; /* Ensure body takes full viewport height */
             overflow-x: hidden; /* Prevent horizontal scroll */
-            position: relative; /* For pseudo-element overlay */
+            position: relative; /* For pseudo-element overlay and video positioning */
+        }
+
+        /* --- VIDEO BACKGROUND STYLES --- */
+        #video-background {
+            position: fixed; /* Fixes the video to the viewport */
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -2; /* Ensure video is behind everything else */
+            background-size: cover; /* Important for scaling the video */
         }
 
         /* --- OPTIONAL: Background Overlay for better text contrast --- */
         body::before {
             content: '';
-            position: absolute;
+            position: fixed; /* Change to fixed to cover entire viewport */
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
             background: rgba(0, 0, 0, 0.4); /* Dark semi-transparent overlay */
-            z-index: -1; /* Place it behind content but above background image */
+            z-index: -1; /* Place it behind content but above the video */
         }
  
         /* --- Adjustments for the feed-container to sit on top --- */
@@ -149,6 +160,11 @@
     </style>
 </head>
 <body>
+
+    <video autoplay muted loop id="video-background">
+        <source src="i4wlogo.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 
     <div class="grid-container">
         
