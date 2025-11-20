@@ -15,10 +15,26 @@
             min-height: 100vh; /* Ensure body takes full viewport height */
             overflow-x: hidden; /* Prevent horizontal scroll */
             position: relative; /* For pseudo-element overlay and video positioning */
+
+            /* --- ADDED FOR BACKGROUND IMAGE --- */
+            background-image: url('00proact.png');
+            background-size: cover; /* Ensures the image covers the whole screen */
+            background-position: center center; /* Centers the image */
+            background-attachment: fixed; /* Keeps the background static when scrolling */
         }
 
-     
- 
+        /* --- Background Image Overlay for Text Readability (Added for image background) --- */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.75); /* Dark semi-transparent overlay */
+            z-index: 0; /* Place behind the grid-container */
+        }
+
         /* --- Adjustments for the feed-container to sit on top --- */
         .grid-container {
             display: grid;
@@ -138,7 +154,7 @@
 </head>
 <body>
 
-   
+    
 
     <div class="grid-container">
         
@@ -228,14 +244,17 @@
     <script>
         function toggleLinks(id) {
             var element = document.getElementById(id);
+            // This is a simple toggle logic. For a smooth animation, CSS transitions for max-height/opacity would be better.
             if (element.style.display === "none" || element.style.display === "") {
                 element.style.display = "block";
+                // Optionally add animation class for visual effect
+                element.style.animation = "fadeIn 0.5s ease-out";
             } else {
                 element.style.display = "none";
+                element.style.animation = "none";
             }
         }
     </script>
 
 </body>
 </html>
-
