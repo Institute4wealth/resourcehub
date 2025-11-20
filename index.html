@@ -30,10 +30,7 @@
             background: rgba(0, 0, 0, 0.4); /* Dark semi-transparent overlay */
             z-index: -1; /* Place it behind content but above background image */
         }
-
-      
-        }
-
+ 
         /* --- Adjustments for the feed-container to sit on top --- */
         .grid-container {
             display: grid;
@@ -41,7 +38,7 @@
             gap: 30px; /* Space between grid items */
             max-width: 960px; /* Adjust max width of the grid */
             margin: 0 auto; /* Center the grid container */
-            padding: 20px; /* Add padding here instead of body */
+            padding: 40px 20px 20px 20px; /* Increased top padding to compensate for removed H1 margin */
             position: relative; /* Ensure it stacks correctly over overlay */
             z-index: 1; /* Bring it above the ::before pseudo-element */
         }
@@ -109,17 +106,17 @@
         }
 
         .link-list a {
-            color: #DAA520; /* Techy blue for links */
+            color: #DAA520; /* Primary gold color for links */
             text-decoration: none;
             font-weight: 500;
             display: block;
             font-size: 1.1em;
             transition: color 0.2s ease-in-out;
-            text-shadow: 0 0 5px rgba(77, 163, 255, 0.4); /* Subtle blue text glow */
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.4); /* Subtle gold text glow */
         }
 
         .link-list a:hover {
-            color: #FFD700; /* Lighter blue on hover */
+            color: #FFD700; /* Lighter gold on hover */
             text-decoration: underline;
             text-shadow: 0 0 8px #DAA520; /* More pronounced glow on hover */
         }
@@ -145,10 +142,6 @@
                 gap: 20px;
                 max-width: 95%;
             }
-            h1 {
-                font-size: 2em;
-                margin-bottom: 30px;
-            }
             .link-list {
                 padding: 10px 15px;
             }
@@ -156,8 +149,6 @@
     </style>
 </head>
 <body>
-
-    <h1>Institute4Wealth Resource Hub</h1>
 
     <div class="grid-container">
         
@@ -257,7 +248,3 @@
 
 </body>
 </html>
-
-
-
-
