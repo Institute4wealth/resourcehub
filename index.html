@@ -4,53 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Institute4wealth Resource Hub</title>
+
     <style>
-        /* --- GLOBAL STYLES & BACKGROUND --- */
         body {
-            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            font-family: 'Segoe UI','Roboto',sans-serif;
             margin: 0;
             padding: 0;
-            line-height: 1.6;
-            min-height: 100vh;
-            overflow-x: hidden;
-            
-            /* Background: Black fallback, then your image, fixed and covering the screen */
-            background-color: #000000;
-            /* 🌟 UPDATED: Set background image to 00proact.png 🌟 */
             background: url('00proact.png') center center / cover no-repeat fixed;
-            color: #C0C0C0; /* Base text color (light gray) */
+            background-color: black;
+            color: #C0C0C0;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
-        
-        /* --- MAIN CONTAINER (USING FLEXBOX FOR 2x3 LAYOUT) --- */
+
         .flex-container {
             display: flex;
-            /* Flex-wrap ensures items break into 2 rows of 3 */
-            flex-wrap: wrap; 
+            flex-wrap: wrap;
             justify-content: center;
-            align-items: flex-start;
             max-width: 960px;
-            margin: 0 auto;
+            margin: auto;
             padding: 40px 20px 60px 20px;
         }
 
-        /* --- CATEGORY ITEMS (The Pictures) --- */
         .category-item {
-            /* 🌟 FIX: Forces each item to take up slightly less than 1/3rd of the 960px container 🌟 */
-            width: 300px; 
-            margin: 15px; /* Spacing between items (30px total gap) */
+            width: 300px;
+            margin: 15px;
             position: relative;
-            box-sizing: border-box; /* Include padding/border in the width */
+            box-sizing: border-box;
         }
 
         .category-image {
             width: 100%;
-            height: auto;
-            cursor: pointer;
-            display: block;
             border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.7);
             border: 2px solid rgba(255, 215, 0, 0.4);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
         }
 
         .category-image:hover {
@@ -58,212 +47,191 @@
             box-shadow: 0 12px 25px rgba(0,0,0,0.9);
         }
 
-        /* --- LINK LIST STYLING (The content that opens) --- */
         .link-list {
-            display: none; 
+            display: none;
             list-style: none;
             padding: 15px 20px;
             margin-top: 10px;
-            background-color: rgba(0, 0, 0, 0.85); 
             border-radius: 12px;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); 
-            backdrop-filter: blur(8px); 
-            border: 1px solid #DAA52050; 
-            overflow: hidden;
+            background: rgba(0,0,0,0.85);
+            border: 1px solid rgba(218,165,32,0.5);
+            box-shadow: 0 0 15px rgba(255,215,0,0.4);
+            backdrop-filter: blur(8px);
         }
 
         .link-list li {
             margin-bottom: 12px;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        
+
         .link-list li:last-child {
             border-bottom: none;
         }
 
-        /* 🌟 GOLD LINK STYLING 🌟 */
-        a, .gold-text {
-            color: #DAA520; /* Primary gold color */
-            text-decoration: none;
+        /* UNIFORM GOLD LINK STYLING */
+        a {
+            color: #DAA520 !important;
             font-weight: 500;
-            transition: color 0.2s, text-shadow 0.2s;
-            text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+            text-decoration: none;
+            text-shadow: 0 0 5px rgba(255,215,0,0.3);
+            transition: 0.2s;
         }
 
         a:hover {
-            color: #FFD700; /* Bright gold on hover */
+            color: #FFD700 !important;
             text-decoration: underline;
-            text-shadow: 0 0 10px #FFD700;
+            text-shadow: 0 0 10px rgba(255,215,0,1);
         }
 
-        /* Sub-list styling */
+        /* Sub-lists (YouTube, Instagram, etc.) */
         .link-list ul {
             list-style: disc;
             padding-left: 20px;
-            margin-top: 5px;
-            color: #DAA520; /* Gold bullets for nested lists */
-        }
-        
-        .link-list ul a {
-             font-size: 0.9em;
-             color: #C0C0C0; /* Sub-links slightly lighter */
-        }
-        
-        .link-list ul a:hover {
-             color: #DAA520;
+            margin-top: 8px;
         }
 
-        /* --- Animations --- */
+        .gold-text {
+            color: #DAA520;
+            font-weight: 600;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- Responsive adjustments --- */
-        @media (max-width: 950px) {
-            /* Go to 2 columns for medium screens */
-            .category-item {
-                width: 400px; 
-            }
-        }
-        
         @media (max-width: 850px) {
-            /* Force 2 columns when total width is less */
-            .category-item {
-                width: 45%; 
-                margin: 2.5%;
-            }
+            .category-item { width: 45%; margin: 2.5%; }
         }
 
         @media (max-width: 500px) {
-            /* Single column for mobile */
-            .category-item {
-                width: 90%;
-                margin: 15px auto;
-            }
+            .category-item { width: 90%; margin: 15px auto; }
         }
     </style>
 </head>
+
 <body>
 
-    <div class="flex-container">
-        
-        <div class="category-item">
-            <img src="image_url_for_category_1.png" alt="Portals & Enrollment" class="category-image" onclick="toggleLinks('portalsLinks')">
-            <ul id="portalsLinks" class="link-list">
-                <li><a href="https://app.phpbamboo.com/agent/signin">PHP Agency Agent Sign-in</a></li>
-                <li><a href="https://quest.phpagency.com/enrollments">Quest Enrollment (PHP Agency)</a></li>
-                <li><a href="https://success.soldoutservant.com/captains-system-8078">BOM Guest list “Captains”</a></li>
-          </ul>
+<div class="flex-container">
 
-        <div class="category-item">
-            <img src="image_url_for_category_2.png" alt="Licensing & Exam Prep" class="category-image" onclick="toggleLinks('licensingLinks')">
-            <ul id="licensingLinks" class="link-list">
-                <li><a href="https://docs.google.com/presentation/d/18wR3ZUkle_TovdN8aM9DEru8-tuxIqHBziht1_8s7CM/edit?usp=drivesdk">Study Guide 1 </a></li>
-                <li><a href="https://docs.google.com/presentation/d/10kEZzzLXr_fvvI_WL4CxhleV2RwOYoiTsG9BmtaNxOg/edit?usp=drivesdk">Study Guide 2</a></li>
-                <li><a href="https://docs.google.com/document/d/1Et989PyVpNmFblWXWDNJLmlUoKfbcjsdTUNffI2arOo/edit?usp=drivesdk">Study Guide 3</a></li>
-                <li><a href="https://sso.teachable.com/secure/2465812/identity/sign_up/otp">Teachable Sign-Up (OTP)</a></li>
-                <li><a href="https://www.xcelsolutions.com">XCEL Solutions</a></li>
-                <li><a href="https://www.prometric.com/exams/mia">Prometric Exam MIA</a></li>
-                <li><a href="https://www.prometric.com/insurance-practice-test">Prometric Insurance Practice Test</a></li>
-                <li><a href="https://www.brainscape.com/p/6B6KO-LH-DEMHH">Brainscape Flash-Card Deck</a></li>
-            </ul>
-        </div>
+    <!-- CATEGORY 1 -->
+    <div class="category-item">
+        <img src="image_url_for_category_1.png" class="category-image"
+             onclick="toggleLinks('portalsLinks')" alt="Portals & Enrollment">
 
-        <div class="category-item">
-            <img src="image_url_for_category_3.png" alt="Onboarding Documents & Tools" class="category-image" onclick="toggleLinks('documentsLinks')">
-            <ul id="documentsLinks" class="link-list">
-                <li><a href="https://docs.google.com/document/d/1l3glUg6go2Rg-DVq2OAIVaqt2HVkG7MrdcvI9k9UKnc/edit?usp=drivesdk">Training Guide 1</a></li>
-                <li><a href=https://docs.google.com/document/d/1QwVC4dWE91qepclvO9wGgjL96wpL7qPO03wbkGli6JM/edit?usp=drivesdk">Training Guide 2</a></li>
-                <li><a href="https://docs.google.com/presentation/d/1fl3Di8r66ykEF1F0WzY5tgd5NDBrrGCAlsOXspQkuWs/edit?usp=sharing">Presentation — CFT PANEL CHECKLIST</a></li>
-                <li><a href="https://docs.google.com/spreadsheets/d/1J1uOsthhvERm8OcjBNRm8uELJC1vzxYcyIVRPFZHV_M/edit?usp=sharing">Spreadsheet — Planning/Tracking 1</a></li>
-                <li><a href="https://docs.google.com/spreadsheets/d/1vzjgx_GyrHowfGyJSZ5DKxKhC-6NDA5b2I0jRyLe-C4/edit?usp=sharing">Spreadsheet — Planning/Tracking 2</a></li>
-                <li><a href="https://docs.google.com/spreadsheets/d/1ukI0PyY6qUMyF4tslG-XYwzUpzZo49wjFQJjhaDLbFU/edit?usp=sharing">Spreadsheet — Planning/Tracking 3</a></li>
-            </ul>
-        </div>
-
-        <div class="category-item">
-            <img src="image_url_for_category_4.png" alt="Training Modules & Strategy" class="category-image" onclick="toggleLinks('trainingLinks')">
-            <ul id="trainingLinks" class="link-list">
-                <li><a href="https://docs.google.com/document/d/118U72MWvgP0DP8iL5_EToI0UHrEQQ0uDqtQ__lX2UFE/edit">Jorge Pelayo Fast Start</a></li>
-                <li><a href="https://www.dropbox.com/scl/fi/vtbm6wp33y5n13fauwwad/Fast-Start-Compensation-Breakdown.mp4?rlkey=2dh5vuuipz9osduvnu0y89wuj&e=1&st=r4ri3sj0&dl=0">Fast-Start Compensation Breakdown (Dropbox)</a></li>
-                <li><a href="https://www.loom.com/share/33aa22abf08f44619b1eb5fed13042dd?sid=79225b02-5d01-4642-831e-8de38789bbd9">Loom Training Video</a></li>
-                <li><a href="https://youtu.be/D66p_kJqieo?si=rKsqiGXmis06Jr7S">How to Write a One Page Business Plan (YouTube)</a></li>
-                <li><a href="https://youtu.be/hdGKAHvgBqo?si=ICZwyAN1hr_HC8jP">How To Build Generational Wealth In 2025 (YouTube)</a></li>
-                <li><a href="https://www.youtube.com/watch?v=O8Vbl9y5Qvk">Kiana Anderson Greatness Path</a></li>
-            </ul>
-        </div>
-
-        <div class="category-item">
-            <img src="image_url_for_category_5.png" alt="Leadership & Mentorship" class="category-image" onclick="toggleLinks('leadershipLinks')">
-            <ul id="leadershipLinks" class="link-list">
-                <li><strong class="gold-text">Instagram Profiles:</strong>
-                    <ul>
-                        <li><a href="https://www.instagram.com/patrickbetdavid?igsh=MTl6ZXJkdW02OGtsdA==">Patrick Bet-David</a></li>
-                        <li><a href="https://www.instagram.com/moneysmartguy?igsh=cXJqdTI3OHRzaTA2">MoneySmartGuy</a></li>
-                        <li><a href="https://www.instagram.com/soldoutservant?igsh=dGN3aGZtajcwZzVk">SoldOutServant</a></li>
-                        <li><a href="https://www.instagram.com/phpagency?igsh=MWtrMnUwbXQ5YjJzYQ==">PHP Agency</a></li>
-                    </ul>
-                </li>
-                <li><strong class="gold-text">YouTube Channels:</strong>
-                    <ul>
-                        <li><a href="https://www.youtube.com/@PHPAgency">PHP Agency</a></li>
-                        <li><a href="https://www.youtube.com/@VALUETAINMENT/videos">Valuetainment</a></li>
-                        <li><a href="https://www.youtube.com/@7FigureSquad">7 Figure Squad</a></li>
-                        <li><a href="https://www.youtube.com/@servetoearn9272">Serve to Earn</a></li>
-                    </ul>
-                </li>
-                <li><strong class="gold-text">Key Videos:</strong>
-                    <ul>
-                        <li><a href="https://www.youtube.com/watch?v=ur1Ay2UMn2c">Top 10 Investments Patrick Bet-David Made</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-
-        <div class="category-item">
-            <img src="image_url_for_category_6.png" alt="Events & Community" class="category-image" onclick="toggleLinks('eventsLinks')">
-            <ul id="eventsLinks" class="link-list">
-                <li><a href="https://www.eventcombo.com/e/2026-Regional-Event-76005">2026 Regional Event Registration</a></li>
-                <li><a href="https://www.youtube.com/watch?v=UwPMfOVnfyo">PHP Take Off 2025 - Event Highlights</a></li>
-            </ul>
-        </div>
-
+        <ul id="portalsLinks" class="link-list">
+            <li><a href="https://app.phpbamboo.com/agent/signin">PHP Agency Agent Sign-in</a></li>
+            <li><a href="https://quest.phpagency.com/enrollments">Quest Enrollment (PHP Agency)</a></li>
+            <li><a href="https://success.soldoutservant.com/captains-system-8078">BOM Guest list “Captains”</a></li>
+        </ul>
     </div>
 
-    <script>
-        function toggleLinks(id) {
-            var element = document.getElementById(id);
-            // Close any other open link lists
-            document.querySelectorAll('.link-list').forEach(function(list) {
-                if (list.id !== id && list.style.display === 'block') {
-                    list.style.display = 'none';
-                    list.style.animation = 'none';
-                }
-            });
+    <!-- CATEGORY 2 -->
+    <div class="category-item">
+        <img src="image_url_for_category_2.png" class="category-image"
+             onclick="toggleLinks('licensingLinks')" alt="Licensing & Exam Prep">
 
-            // Toggle the clicked link list
-            if (element.style.display === "none" || element.style.display === "") {
-                element.style.display = "block";
-                element.style.animation = "fadeIn 0.5s ease-out";
-            } else {
-                element.style.display = "none";
-                element.style.animation = "none";
-            }
-        }
-    </script>
+        <ul id="licensingLinks" class="link-list">
+            <li><a href="https://docs.google.com/presentation/d/18wR3ZUkle_TovdN8aM9DEru8-tuxIqHBziht1_8s7CM/edit?usp=drivesdk">Study Guide 1</a></li>
+            <li><a href="https://docs.google.com/presentation/d/10kEZzzLXr_fvvI_WL4CxhleV2RwOYoiTsG9BmtaNxOg/edit?usp=drivesdk">Study Guide 2</a></li>
+            <li><a href="https://docs.google.com/document/d/1Et989PyVpNmFblWXWDNJLmlUoKfbcjsdTUNffI2arOo/edit?usp=drivesdk">Study Guide 3</a></li>
+            <li><a href="https://sso.teachable.com/secure/2465812/identity/sign_up/otp">Teachable Sign-Up (OTP)</a></li>
+            <li><a href="https://www.xcelsolutions.com">XCEL Solutions</a></li>
+            <li><a href="https://www.prometric.com/exams/mia">Prometric Exam MIA</a></li>
+            <li><a href="https://www.prometric.com/insurance-practice-test">Prometric Practice Test</a></li>
+            <li><a href="https://www.brainscape.com/p/6B6KO-LH-DEMHH">Brainscape Flashcards</a></li>
+        </ul>
+    </div>
+
+    <!-- CATEGORY 3 -->
+    <div class="category-item">
+        <img src="image_url_for_category_3.png" class="category-image"
+             onclick="toggleLinks('documentsLinks')" alt="Onboarding Docs & Tools">
+
+        <ul id="documentsLinks" class="link-list">
+            <li><a href="https://docs.google.com/document/d/1l3glUg6go2Rg-DVq2OAIVaqt2HVkG7MrdcvI9k9UKnc/edit?usp=drivesdk">Training Guide 1</a></li>
+            <li><a href="https://docs.google.com/document/d/1QwVC4dWE91qepclvO9wGgjL96wpL7qPO03wbkGli6JM/edit?usp=drivesdk">Training Guide 2</a></li>
+            <li><a href="https://docs.google.com/presentation/d/1fl3Di8r66ykEF1F0WzY5tgd5NDBrrGCAlsOXspQkuWs/edit?usp=sharing">CFT Panel Checklist</a></li>
+            <li><a href="https://docs.google.com/spreadsheets/d/1J1uOsthhvERm8OcjBNRm8uELJC1vzxYcyIVRPFZHV_M/edit?usp=sharing">Planning Spreadsheet 1</a></li>
+            <li><a href="https://docs.google.com/spreadsheets/d/1vzjgx_GyrHowfGyJSZ5DKxKhC-6NDA5b2I0jRyLe-C4/edit?usp=sharing">Planning Spreadsheet 2</a></li>
+            <li><a href="https://docs.google.com/spreadsheets/d/1ukI0PyY6qUMyF4tslG-XYwzUpzZo49wjFQJjhaDLbFU/edit?usp=sharing">Planning Spreadsheet 3</a></li>
+        </ul>
+    </div>
+
+    <!-- CATEGORY 4 -->
+    <div class="category-item">
+        <img src="image_url_for_category_4.png" class="category-image"
+             onclick="toggleLinks('trainingLinks')" alt="Training Modules & Strategy">
+
+        <ul id="trainingLinks" class="link-list">
+            <li><a href="https://docs.google.com/document/d/118U72MWvgP0DP8iL5_EToI0UHrEQQ0uDqtQ__lX2UFE/edit">Fast Start (Jorge Pelayo)</a></li>
+            <li><a href="https://www.dropbox.com/scl/fi/vtbm6wp33y5n13fauwwad/Fast-Start-Compensation-Breakdown.mp4?dl=0">Fast-Start Compensation Breakdown</a></li>
+            <li><a href="https://www.loom.com/share/33aa22abf08f44619b1eb5fed13042dd">Loom Training Video</a></li>
+            <li><a href="https://youtu.be/D66p_kJqieo">One Page Business Plan</a></li>
+            <li><a href="https://youtu.be/hdGKAHvgBqo">Build Generational Wealth 2025</a></li>
+            <li><a href="https://www.youtube.com/watch?v=O8Vbl9y5Qvk">Kiana Anderson — Greatness Path</a></li>
+        </ul>
+    </div>
+
+    <!-- CATEGORY 5 -->
+    <div class="category-item">
+        <img src="image_url_for_category_5.png" class="category-image"
+             onclick="toggleLinks('leadershipLinks')" alt="Leadership & Mentorship">
+
+        <ul id="leadershipLinks" class="link-list">
+            <li>
+                <strong class="gold-text">Instagram Profiles:</strong>
+                <ul>
+                    <li><a href="https://www.instagram.com/patrickbetdavid">Patrick Bet-David</a></li>
+                    <li><a href="https://www.instagram.com/moneysmartguy">MoneySmartGuy</a></li>
+                    <li><a href="https://www.instagram.com/soldoutservant">SoldOutServant</a></li>
+                    <li><a href="https://www.instagram.com/phpagency">PHP Agency</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <strong class="gold-text">YouTube Channels:</strong>
+                <ul>
+                    <li><a href="https://www.youtube.com/@PHPAgency">PHP Agency</a></li>
+                    <li><a href="https://www.youtube.com/@VALUETAINMENT">Valuetainment</a></li>
+                    <li><a href="https://www.youtube.com/@7FigureSquad">7 Figure Squad</a></li>
+                    <li><a href="https://www.youtube.com/@servetoearn9272">Serve to Earn</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <strong class="gold-text">Key Videos:</strong>
+                <ul>
+                    <li><a href="https://www.youtube.com/watch?v=ur1Ay2UMn2c">Top 10 Investments — PBD</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- CATEGORY 6 -->
+    <div class="category-item">
+        <img src="image_url_for_category_6.png" class="category-image"
+             onclick="toggleLinks('eventsLinks')" alt="Events & Community">
+
+        <ul id="eventsLinks" class="link-list">
+            <li><a href="https://www.eventcombo.com/e/2026-Regional-Event-76005">2026 Regional Event Registration</a></li>
+            <li><a href="https://www.youtube.com/watch?v=UwPMfOVnfyo">PHP Take Off 2025</a></li>
+        </ul>
+    </div>
+
+</div>
+
+<script>
+    function toggleLinks(id) {
+        document.querySelectorAll('.link-list').forEach(list => {
+            if (list.id !== id) list.style.display = "none";
+        });
+        let target = document.getElementById(id);
+        target.style.display = (target.style.display === "block") ? "none" : "block";
+        target.style.animation = "fadeIn 0.5s ease-out";
+    }
+</script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
