@@ -16,8 +16,11 @@
             overflow-x: hidden; /* Prevent horizontal scroll */
             position: relative; /* For pseudo-element overlay and video positioning */
 
-            /* 🌟 REPLACED BACKGROUND PROPERTIES WITH SHORTHAND FOR FULL COVERAGE 🌟 */
-            background: url('00proact.png') center center / cover no-repeat fixed;
+            /* --- ADDED FOR BACKGROUND IMAGE --- */
+            background-image: url('00proact.png');
+            background-size: cover; /* Ensures the image covers the whole screen */
+            background-position: center center; /* Centers the image */
+            background-attachment: fixed; /* Keeps the background static when scrolling */
         }
 
         /* --- Background Image Overlay for Text Readability (Added for image background) --- */
