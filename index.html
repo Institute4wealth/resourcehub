@@ -1,264 +1,242 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <style>
-        /* --- NEW BODY STYLES --- */
-        body {
-            font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; /* More modern font stack */
-            margin: 0;
-            padding: 0; /* Changed to 0 as content is within feed-container */
-            color: #DAA520; /* Slightly off-white for softer tech look */
-            line-height: 1.6;
-            min-height: 100vh; /* Ensure body takes full viewport height */
-            overflow-x: hidden; /* Prevent horizontal scroll */
-            position: relative; /* For pseudo-element overlay and video positioning */
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        /* --- NEW BODY STYLES --- */
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; /* More modern font stack */
+            margin: 0;
+            padding: 0; /* Changed to 0 as content is within feed-container */
+            color: #DAA520; /* Slightly off-white for softer tech look */
+            line-height: 1.6;
+            min-height: 100vh; /* Ensure body takes full viewport height */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            position: relative; /* For pseudo-element overlay and video positioning */
+        }
 
-            /* --- ADDED FOR BACKGROUND IMAGE --- */
-            background-image: url('00proact.png');
-            background-size: cover; /* Ensures the image covers the whole screen */
-            background-position: center center; /* Centers the image */
-            background-attachment: fixed; /* Keeps the background static when scrolling */
-        }
+     
+ 
+        /* --- Adjustments for the feed-container to sit on top --- */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 3 columns, responsive */
+            gap: 30px; /* Space between grid items */
+            max-width: 960px; /* Adjust max width of the grid */
+            margin: 0 auto; /* Center the grid container */
+            padding: 40px 20px 20px 20px; /* Increased top padding to compensate for removed H1 margin */
+            position: relative; /* Ensure it stacks correctly over overlay */
+            z-index: 1; /* Bring it above the ::before pseudo-element */
+        }
 
-        /* --- Background Image Overlay for Text Readability (Added for image background) --- */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.75); /* Dark semi-transparent overlay */
-            z-index: 0; /* Place behind the grid-container */
-        }
+        /* --- Category Item Styling (no card, just image and its associated list) --- */
+        .category-item {
+            position: relative;
+        }
 
-        /* --- Adjustments for the feed-container to sit on top --- */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 3 columns, responsive */
-            gap: 30px; /* Space between grid items */
-            max-width: 960px; /* Adjust max width of the grid */
-            margin: 0 auto; /* Center the grid container */
-            padding: 40px 20px 20px 20px; /* Increased top padding to compensate for removed H1 margin */
-            position: relative; /* Ensure it stacks correctly over overlay */
-            z-index: 1; /* Bring it above the ::before pseudo-element */
-        }
+        .category-image {
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+            display: block;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
 
-        /* --- Category Item Styling (no card, just image and its associated list) --- */
-        .category-item {
-            position: relative;
-        }
+        .category-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.8);
+        }
 
-        .category-image {
-            width: 100%;
-            height: auto;
-            cursor: pointer;
-            display: block;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-            border: 2px solid rgba(255, 215, 0, 0.4);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
+        /* --- Link List Styling Refinement --- */
+        .link-list {
+            display: none; /* Hidden by default */
+            list-style: none;
+            padding: 15px 20px;
+            margin-top: 10px; /* Space between image and revealed links */
+            background-color: rgba(0, 0, 0, 0.8); /* Darker, less transparent for links */
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); /* Subtle golden glow for the list */
+            transition: all 0.3s ease-in-out; /* Smooth transition for showing/hiding */
+            backdrop-filter: blur(5px); /* Stronger blur for "frosted glass" look */
+            border: 1px solid rgba(255, 215, 0, 0.3); /* Softer golden border */
+            padding-top: 20px;
+            min-height: 0; 
+            overflow: hidden;
+        }
 
-        .category-image:hover {
-            transform: scale(1.02);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.8);
-        }
+        .link-list li {
+            margin-bottom: 12px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.05); /* Even subtler background */
+            border-radius: 8px;
+            backdrop-filter: blur(3px);
+            border: 1px solid rgba(255, 215, 0, 0.05); /* Very light golden line */
+        }
+        
+        /* Styling for nested lists (Instagram/YouTube Profiles) */
+        .link-list li ul {
+            list-style: disc; /* Use disc bullets for nested lists */
+            padding-left: 20px;
+            margin-top: 5px;
+            color: #C0C0C0; /* Slightly lighter text for nested list items */
+        }
 
-        /* --- Link List Styling Refinement --- */
-        .link-list {
-            display: none; /* Hidden by default */
-            list-style: none;
-            padding: 15px 20px;
-            margin-top: 10px; /* Space between image and revealed links */
-            background-color: rgba(0, 0, 0, 0.8); /* Darker, less transparent for links */
-            border-radius: 12px;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); /* Subtle golden glow for the list */
-            transition: all 0.3s ease-in-out; /* Smooth transition for showing/hiding */
-            backdrop-filter: blur(5px); /* Stronger blur for "frosted glass" look */
-            border: 1px solid rgba(255, 215, 0, 0.3); /* Softer golden border */
-            padding-top: 20px;
-            min-height: 0; 
-            overflow: hidden;
-        }
+        .link-list li ul li {
+            background-color: transparent; /* No background for nested list items */
+            border: none;
+            padding: 5px 0;
+            margin-bottom: 5px;
+        }
 
-        .link-list li {
-            margin-bottom: 12px;
-            padding: 10px;
-            background-color: rgba(255, 255, 255, 0.05); /* Even subtler background */
-            border-radius: 8px;
-            backdrop-filter: blur(3px);
-            border: 1px solid rgba(255, 215, 0, 0.05); /* Very light golden line */
-        }
-        
-        /* Styling for nested lists (Instagram/YouTube Profiles) */
-        .link-list li ul {
-            list-style: disc; /* Use disc bullets for nested lists */
-            padding-left: 20px;
-            margin-top: 5px;
-            color: #C0C0C0; /* Slightly lighter text for nested list items */
-        }
+        .link-list a {
+            color: #DAA520; /* Primary gold color for links */
+            text-decoration: none;
+            font-weight: 500;
+            display: block;
+            font-size: 1.1em;
+            transition: color 0.2s ease-in-out;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.4); /* Subtle gold text glow */
+        }
 
-        .link-list li ul li {
-            background-color: transparent; /* No background for nested list items */
-            border: none;
-            padding: 5px 0;
-            margin-bottom: 5px;
-        }
+        .link-list a:hover {
+            color: #FFD700; /* Lighter gold on hover */
+            text-decoration: underline;
+            text-shadow: 0 0 8px #DAA520; /* More pronounced glow on hover */
+        }
 
-        .link-list a {
-            color: #DAA520; /* Primary gold color for links */
-            text-decoration: none;
-            font-weight: 500;
-            display: block;
-            font-size: 1.1em;
-            transition: color 0.2s ease-in-out;
-            text-shadow: 0 0 5px rgba(255, 215, 0, 0.4); /* Subtle gold text glow */
-        }
+        /* --- Animations --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-        .link-list a:hover {
-            color: #FFD700; /* Lighter gold on hover */
-            text-decoration: underline;
-            text-shadow: 0 0 8px #DAA520; /* More pronounced glow on hover */
-        }
+        /* --- Responsive adjustments for smaller screens --- */
+        @media (max-width: 900px) {
+            .grid-container {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+                max-width: 90%;
+            }
+        }
 
-        /* --- Animations --- */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- Responsive adjustments for smaller screens --- */
-        @media (max-width: 900px) {
-            .grid-container {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 20px;
-                max-width: 90%;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .grid-container {
-                grid-template-columns: 1fr;
-                gap: 20px;
-                max-width: 95%;
-            }
-            .link-list {
-                padding: 10px 15px;
-            }
-        }
-    </style>
+        @media (max-width: 600px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                max-width: 95%;
+            }
+            .link-list {
+                padding: 10px 15px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    
+   
 
-    <div class="grid-container">
-        
-        <div class="category-item">
-            <img src="image_url_for_category_1.png" alt="Portals & Enrollment" class="category-image" onclick="toggleLinks('portalsLinks')">
-            <ul id="portalsLinks" class="link-list">
-                <li><a href="https://app.phpbamboo.com/agent/signin">PHP Agency Agent Sign-in</a></li>
-                <li><a href="https://quest.phpagency.com/enrollments">Quest Enrollment (PHP Agency)</a></li>
-            </ul>
-        </div>
+    <div class="grid-container">
+        
+        <div class="category-item">
+            <img src="image_url_for_category_1.png" alt="Portals & Enrollment" class="category-image" onclick="toggleLinks('portalsLinks')">
+            <ul id="portalsLinks" class="link-list">
+                <li><a href="https://app.phpbamboo.com/agent/signin">PHP Agency Agent Sign-in</a></li>
+                <li><a href="https://quest.phpagency.com/enrollments">Quest Enrollment (PHP Agency)</a></li>
+            </ul>
+        </div>
 
-        <div class="category-item">
-            <img src="image_url_for_category_2.png" alt="Licensing & Exam Prep" class="category-image" onclick="toggleLinks('licensingLinks')">
-            <ul id="licensingLinks" class="link-list">
-                <li><a href="https://docs.google.com/presentation/d/18wR3ZUkle_TovdN8aM9DEru8-tuxIqHBziht1_8s7CM/edit?usp=drivesdk">Study Guide 1 </a></li>
-                <li><a href="https://docs.google.com/presentation/d/10kEZzzLXr_fvvI_WL4CxhleV2RwOYoiTsG9BmtaNxOg/edit?usp=drivesdk">Study Guide 2</a></li>
-               <li><a href="https://docs.google.com/document/d/1TBJBJXBJHjPoYgKI3sSX58R3i7YBZVLYo3Sp_ofRYuw/edit?usp=sharing">Study Guide 3</a></li>
-                <li><a href="https://docs.google.com/document/d/118U72MWvgP0DP8iL5_EToI0UHrEQQ0uDqtQ__lX2UFE/edit">Study Guide 4</a></li>
-                
-                <li><a href="https://sso.teachable.com/secure/2465812/identity/sign_up/otp">Teachable Sign-Up (OTP)</a></li>
-                <li><a href="https://www.xcelsolutions.com">XCEL Solutions</a></li>
-                <li><a href="https://www.prometric.com/exams/mia">Prometric Exam MIA</a></li>
-                <li><a href="https://www.prometric.com/insurance-practice-test">Prometric Insurance Practice Test</a></li>
-                <li><a href="https://www.brainscape.com/p/6B6KO-LH-DEMHH">Brainscape Flash-Card Deck</a></li>
-            </ul>
-        </div>
+        <div class="category-item">
+            <img src="image_url_for_category_2.png" alt="Licensing & Exam Prep" class="category-image" onclick="toggleLinks('licensingLinks')">
+            <ul id="licensingLinks" class="link-list">
+                <li><a href="https://sso.teachable.com/secure/2465812/identity/sign_up/otp">Teachable Sign-Up (OTP)</a></li>
+                <li><a href="https://www.xcelsolutions.com">XCEL Solutions</a></li>
+                <li><a href="https://www.prometric.com/exams/mia">Prometric Exam MIA</a></li>
+                <li><a href="https://www.prometric.com/insurance-practice-test">Prometric Insurance Practice Test</a></li>
+                <li><a href="https://www.brainscape.com/p/6B6KO-LH-DEMHH">Brainscape Flash-Card Deck</a></li>
+            </ul>
+        </div>
 
-        <div class="category-item">
-            <img src="image_url_for_category_3.png" alt="Onboarding Documents & Tools" class="category-image" onclick="toggleLinks('documentsLinks')">
-            <ul id="documentsLinks" class="link-list">
-                
-                <li><a href="https://docs.google.com/document/d/1I122fVQa6jY_cQgFqrmlZqglzphitwjFsAJdYn-k3h8/edit">Training Guide 1</a></li>
-                <li><a href="https://docs.google.com/document/d/132yCUMxUmjKEvZMyLfXPh0nCKA9mhMFtcST7-Tx6NfA/edit">Training Guide 2</a></li>
-                <li><a href="https://docs.google.com/presentation/d/1fl3Di8r66ykEF1F0WzY5tgd5NDBrrGCAlsOXspQkuWs/edit?usp=sharing">Presentation — CFT PANEL CHECKLIST</a></li>
-                <li><a href="https://docs.google.com/spreadsheets/d/1J1uOsthhvERm8OcjBNRm8uELJC1vzxYcyIVRPFZHV_M/edit?usp=sharing">Spreadsheet — Planning/Tracking 1</a></li>
-                <li><a href="https://docs.google.com/spreadsheets/d/1vzjgx_GyrHowfGyJSZ5DKxKhC-6NDA5b2I0jRyLe-C4/edit?usp=sharing">Spreadsheet — Planning/Tracking 2</a></li>
-                <li><a href="https://docs.google.com/spreadsheets/d/1ukI0PyY6qUMyF4tslG-XYwzUpzZo49wjFQJjhaDLbFU/edit?usp=sharing">Spreadsheet — Planning/Tracking 3</a></li>
-            </ul>
-        </div>
+        <div class="category-item">
+            <img src="image_url_for_category_3.png" alt="Onboarding Documents & Tools" class="category-image" onclick="toggleLinks('documentsLinks')">
+            <ul id="documentsLinks" class="link-list">
+                <li><a href="https://docs.google.com/presentation/d/18wR3ZUkle_TovdN8aM9DEru8-tuxIqHBziht1_8s7CM/edit?usp=drivesdk">Presentation — Onboarding Deck 1</a></li>
+                <li><a href="https://docs.google.com/presentation/d/10kEZzzLXr_fvvI_WL4CxhleV2RwOYoiTsG9BmtaNxOg/edit?usp=drivesdk">Presentation — Onboarding Deck 2</a></li>
+                <li><a href="https://docs.google.com/document/d/1TBJBJXBJHjPoYgKI3sSX58R3i7YBZVLYo3Sp_ofRYuw/edit?usp=sharing">Document — Training Guide 1</a></li>
+                <li><a href="https://docs.google.com/document/d/118U72MWvgP0DP8iL5_EToI0UHrEQQ0uDqtQ__lX2UFE/edit">Document — Training Guide 2</a></li>
+                <li><a href="https://docs.google.com/document/d/1I122fVQa6jY_cQgFqrmlZqglzphitwjFsAJdYn-k3h8/edit">Document — Training Guide 3</a></li>
+                <li><a href="https://docs.google.com/document/d/132yCUMxUmjKEvZMyLfXPh0nCKA9mhMFtcST7-Tx6NfA/edit">Document — Training Guide 6</a></li>
+                <li><a href="https://docs.google.com/presentation/d/1fl3Di8r66ykEF1F0WzY5tgd5NDBrrGCAlsOXspQkuWs/edit?usp=sharing">Presentation — CFT PANEL CHECKLIST</a></li>
+                <li><a href="https://docs.google.com/spreadsheets/d/1J1uOsthhvERm8OcjBNRm8uELJC1vzxYcyIVRPFZHV_M/edit?usp=sharing">Spreadsheet — Planning/Tracking 1</a></li>
+                <li><a href="https://docs.google.com/spreadsheets/d/1vzjgx_GyrHowfGyJSZ5DKxKhC-6NDA5b2I0jRyLe-C4/edit?usp=sharing">Spreadsheet — Planning/Tracking 2</a></li>
+                <li><a href="https://docs.google.com/spreadsheets/d/1ukI0PyY6qUMyF4tslG-XYwzUpzZo49wjFQJjhaDLbFU/edit?usp=sharing">Spreadsheet — Planning/Tracking 3</a></li>
+            </ul>
+        </div>
 
-        <div class="category-item">
-            <img src="image_url_for_category_4.png" alt="Training Modules & Strategy" class="category-image" onclick="toggleLinks('trainingLinks')">
-            <ul id="trainingLinks" class="link-list">
-                <li><a href="https://www.dropbox.com/scl/fi/vtbm6wp33y5n13fauwwad/Fast-Start-Compensation-Breakdown.mp4?rlkey=2dh5vuuipz9osduvnu0y89wuj&e=1&st=r4ri3sj0&dl=0">Fast-Start Compensation Breakdown (Dropbox)</a></li>
-                <li><a href="https://www.loom.com/share/33aa22abf08f44619b1eb5fed13042dd?sid=79225b02-5d01-4642-831e-8de38789bbd9">Loom Training Video</a></li>
-                <li><a href="https://youtu.be/D66p_kJqieo?si=rKsqiGXmis06Jr7S">How to Write a One Page Business Plan (YouTube)</a></li>
-                <li><a href="https://youtu.be/hdGKAHvgBqo?si=ICZwyAN1hr_HC8jP">How To Build Generational Wealth In 2025 (YouTube)</a></li>
-                <li><a href="https://www.youtube.com/watch?v=O8Vbl9y5Qvk">Kiana Anderson Greatness Path</a></li>
-            </ul>
-        </div>
+        <div class="category-item">
+            <img src="image_url_for_category_4.png" alt="Training Modules & Strategy" class="category-image" onclick="toggleLinks('trainingLinks')">
+            <ul id="trainingLinks" class="link-list">
+                <li><a href="https://www.dropbox.com/scl/fi/vtbm6wp33y5n13fauwwad/Fast-Start-Compensation-Breakdown.mp4?rlkey=2dh5vuuipz9osduvnu0y89wuj&e=1&st=r4ri3sj0&dl=0">Fast-Start Compensation Breakdown (Dropbox)</a></li>
+                <li><a href="https://www.loom.com/share/33aa22abf08f44619b1eb5fed13042dd?sid=79225b02-5d01-4642-831e-8de38789bbd9">Loom Training Video</a></li>
+                <li><a href="https://youtu.be/D66p_kJqieo?si=rKsqiGXmis06Jr7S">How to Write a One Page Business Plan (YouTube)</a></li>
+                <li><a href="https://youtu.be/hdGKAHvgBqo?si=ICZwyAN1hr_HC8jP">How To Build Generational Wealth In 2025 (YouTube)</a></li>
+                <li><a href="https://www.youtube.com/watch?v=O8Vbl9y5Qvk">Kiana Anderson Greatness Path</a></li>
+            </ul>
+        </div>
 
-        <div class="category-item">
-            <img src="image_url_for_category_5.png" alt="Leadership & Mentorship" class="category-image" onclick="toggleLinks('leadershipLinks')">
-            <ul id="leadershipLinks" class="link-list">
-                <li><strong>Instagram Profiles:</strong>
-                    <ul>
-                        <li><a href="https://www.instagram.com/patrickbetdavid?igsh=MTl6ZXJkdW02OGtsdA==">Patrick Bet-David</a></li>
-                        <li><a href="https://www.instagram.com/moneysmartguy?igsh=cXJqdTI3OHRzaTA2">MoneySmartGuy</a></li>
-                        <li><a href="https://www.instagram.com/soldoutservant?igsh=dGN3aGZtajcwZzVk">SoldOutServant</a></li>
-                        <li><a href="https://www.instagram.com/phpagency?igsh=MWtrMnUwbXQ5YjJzYQ==">PHP Agency</a></li>
-                    </ul>
-                </li>
-                <li><strong>YouTube Channels:</strong>
-                    <ul>
-                      
-                        
-                        <li><a href="https://www.youtube.com/@PHPAgency">PHP Agency</a></li>
-                        <li><a href="https://www.youtube.com/@VALUETAINMENT/videos">Valuetainment</a></li>
-                        <li><a href="https://www.youtube.com/@7FigureSquad">7 Figure Squad</a></li>
-                        <li><a href="https://www.youtube.com/@servetoearn9272">Serve to Earn</a></li>
-                    </ul>
-                </li>
-                <li><strong>Key Videos:</strong>
-                    <ul>
-                        <li><a href="https://www.youtube.com/watch?v=ur1Ay2UMn2c">Top 10 Investments Patrick Bet-David Made</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+        <div class="category-item">
+            <img src="image_url_for_category_5.png" alt="Leadership & Mentorship" class="category-image" onclick="toggleLinks('leadershipLinks')">
+            <ul id="leadershipLinks" class="link-list">
+                <li><strong>Instagram Profiles:</strong>
+                    <ul>
+                        <li><a href="https://www.instagram.com/patrickbetdavid?igsh=MTl6ZXJkdW02OGtsdA==">Patrick Bet-David</a></li>
+                        <li><a href="https://www.instagram.com/moneysmartguy?igsh=cXJqdTI3OHRzaTA2">MoneySmartGuy</a></li>
+                        <li><a href="https://www.instagram.com/soldoutservant?igsh=dGN3aGZtajcwZzVk">SoldOutServant</a></li>
+                        <li><a href="https://www.instagram.com/phpagency?igsh=MWtrMnUwbXQ5YjJzYQ==">PHP Agency</a></li>
+                    </ul>
+                </li>
+                <li><strong>YouTube Channels:</strong>
+                    <ul>
+                        <li><a href="https://www.youtube.com/@PHPAgency">PHP Agency</a></li>
+                        <li><a href="https://www.youtube.com/@VALUETAINMENT/videos">Valuetainment</a></li>
+                        <li><a href="https://www.youtube.com/@7FigureSquad">7 Figure Squad</a></li>
+                        <li><a href="https://www.youtube.com/@servetoearn9272">Serve to Earn</a></li>
+                    </ul>
+                </li>
+                <li><strong>Key Videos:</strong>
+                    <ul>
+                        <li><a href="https://www.youtube.com/watch?v=ur1Ay2UMn2c">Top 10 Investments Patrick Bet-David Made</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
 
-        <div class="category-item">
-            <img src="image_url_for_category_6.png" alt="Events & Community" class="category-image" onclick="toggleLinks('eventsLinks')">
-            <ul id="eventsLinks" class="link-list">
-                <li><a href="https://www.eventcombo.com/e/2026-Regional-Event-76005">2026 Regional Event Registration</a></li>
-                <li><a href="https://www.youtube.com/watch?v=UwPMfOVnfyo">PHP Take Off 2025 - Event Highlights</a></li>
-            </ul>
-        </div>
+        <div class="category-item">
+            <img src="image_url_for_category_6.png" alt="Events & Community" class="category-image" onclick="toggleLinks('eventsLinks')">
+            <ul id="eventsLinks" class="link-list">
+                <li><a href="https://www.eventcombo.com/e/2026-Regional-Event-76005">2026 Regional Event Registration</a></li>
+                <li><a href="https://www.youtube.com/watch?v=UwPMfOVnfyo">PHP Take Off 2025 - Event Highlights</a></li>
+            </ul>
+        </div>
 
-    </div>
+    </div>
 
-    <script>
-        function toggleLinks(id) {
-            var element = document.getElementById(id);
-            // This is a simple toggle logic. For a smooth animation, CSS transitions for max-height/opacity would be better.
-            if (element.style.display === "none" || element.style.display === "") {
-                element.style.display = "block";
-                // Optionally add animation class for visual effect
-                element.style.animation = "fadeIn 0.5s ease-out";
-            } else {
-                element.style.display = "none";
-                element.style.animation = "none";
-            }
-        }
-    </script>
+    <script>
+        function toggleLinks(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
 
 </body>
 </html>
+
